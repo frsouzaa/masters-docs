@@ -95,21 +95,21 @@
 % em português, essa é a língua do título e "translatedtitle" se refere ao
 % título em inglês; se seu trabalho está escrito em inglês, essa é a língua
 % do título e "translatedtitle" se refere ao título em português.
-\title{Título do trabalho}[um subtítulo]
-\translatedtitle{Title of the document}[a subtitle]
+\title{Minerando repositórios para analisar tendências no ciclo de vida e popularidade de frameworks e bibliotecas}
+\translatedtitle{Mining repositories to analyze trends in the lifecycle and popularity of frameworks and libraries}
 
-\author[fem]{Nome Completo}
+\author[masc]{Felipe Ribeiro de Souza}
 
 \def\profa{Prof\kern.02em.\kern-.07emª\kern.07em}
 \def\dra{Dr\kern-.04em.\kern-.11emª\kern.07em}
 
 % Para TCCs, este comando define o supervisor
-\orientador[fem]{\profa{} \dra{} Fulana de Tal}
+\orientador[masc]{Prof. Dr. Higor Amário de Souza}
 
 % Se não houver, remova; se houver mais de um, basta
 % repetir o comando quantas vezes forem necessárias
-\coorientador{Prof. Dr. Ciclano de Tal}
-\coorientador[fem]{\profa{} \dra{} Beltrana de Tal}
+% \coorientador{Prof. Dr. Ciclano de Tal}
+% \coorientador[fem]{\profa{} \dra{} Beltrana de Tal}
 
 \banca{
   \profa{} \dra{} Fulana de Tal (orientadora) -- IME-USP [sem ponto final],
@@ -128,13 +128,13 @@
   %doutorado,
   %tcc,
   %definitiva, % É a versão para defesa ou a versão definitiva?
-  %quali, % É qualificação?
+  quali, % É qualificação?
   programa={Ciência da Computação},
 }
 
 \defesa{
   local={São Paulo},
-  data=2017-08-10, % YYYY-MM-DD
+  data=2027-01-15, % YYYY-MM-DD
 }
 
 % Se não houve bolsa, remova
@@ -159,8 +159,8 @@
 %
 %\apoio{During the development if this work, the author received\\
 %      financial support from FAPESP -- grant \#aaaa/nnnnn-d}
-\apoio{Durante o desenvolvimento deste trabalho o autor
-       recebeu auxílio financeiro da XXXX}
+% \apoio{Durante o desenvolvimento deste trabalho o autor
+%        recebeu auxílio financeiro da XXXX}
 
 % A licença do seu trabalho. Use CC-BY, CC-BY-NC, CC-BY-ND, CC-BY-SA,
 % CC-BY-NC-SA ou CC-BY-NC-ND para escolher a licença Creative Commons
@@ -183,15 +183,15 @@
 %
 \direitos{CC-BY}
 
-\fichacatalografica{
+% \fichacatalografica{
 
-\noindent Para gerar a ficha catalográfica, acesse \url{https://fc.ime.usp.br},
-          preencha o formulário e escolha a opção ``Gerar Código \LaTeX''.
-          Basta copiar e colar o resultado dentro do comando \Verb
-          |\fichacatalografica| (substituindo este texto explicativo).
-          \vspace{5\baselineskip}
+% \noindent Para gerar a ficha catalográfica, acesse \url{https://fc.ime.usp.br},
+%           preencha o formulário e escolha a opção ``Gerar Código \LaTeX''.
+%           Basta copiar e colar o resultado dentro do comando \Verb
+%           |\fichacatalografica| (substituindo este texto explicativo).
+%           \vspace{5\baselineskip}
 
-}
+% }
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -231,12 +231,9 @@ uma dedicatória ou epígrafe.
 % epígrafes em todos os capítulos. O comando "\chapter*" faz esta seção
 % não ser incluída no sumário.
 \chapter*{Agradecimentos}
-\epigrafe{Do. Or do not. There is no try.}{Mestre Yoda}
+\epigrafe{Eureca!}{Arquimedes de Siracusa}
 
-Texto texto texto texto texto texto texto texto texto texto texto texto texto
-texto texto texto texto texto texto texto texto texto texto texto texto texto
-texto texto texto texto texto texto texto texto texto texto texto texto texto
-texto texto texto texto. Texto opcional.
+Obrigado a todos que contribuíram com a elaboração e manutenção desse template \LaTeX, está sendo de grande ajuda!
 
 \input{conteudo/resumoabstract}
 
