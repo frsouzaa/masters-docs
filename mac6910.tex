@@ -19,7 +19,7 @@
 \doublespacing
 % \onehalfspacing
 
-\hyphenation{desne-cessárias}
+\hyphenation{}
 
 \title{\textbf{Explorando \textit{Features} do Ecossistema para Prever o Estágio do Ciclo de Vida de \textit{Frameworks} e Bibliotecas}\\[1em]
 \large Projeto de Pesquisa de Mestrado \\
@@ -39,13 +39,13 @@ Orientador: Prof. Dr. Higor Amário de Souza}
 TODO...
 
 \section{Introdução e Justificativa}
-O desenvolvimento de sistemas de \textit{software} é uma atividade complexa e essencial, presente na maioria dos setores econômicos e nas relações humanas. O reuso de \textit{software} é uma estratégia eficiente de implementar funcionalidades comuns, disponibilizadas por meio de \textit{frameworks} e bibliotecas, e acelerar o ciclo de vida de desenvolvimento de \textit{software} (SDLC). \textit{Frameworks} são estruturas de código referentes a todo um sistema ou a parte dele, que servem de base para a implementação de sistemas de \textit{software} \cite{johnson1997}, exemplos comuns incluem \textit{frameworks} para testes ou para desenvolvimento \textit{web}. Já as bibliotecas de \textit{software} contém funções de código voltadas a um domínio específico, prontas para serem reutilizadas em outros projetos, exemplos disso são bibliotecas para tratamento de dados ou identificar padrões em textos. Enquanto bibliotecas podem ser invocadas diretamente pelo código, \textit{frameworks} operam por meio da inversão de controle, gerenciando suas próprias sequências de atividades \cite{johnson1988}. Nesta proposta também iremos vamos utilizar o termo ferramentas para representar a união de \textit{frameworks} e bibliotecas.
+O desenvolvimento de sistemas de \textit{software} é uma atividade complexa e essencial, presente na maioria dos setores econômicos e nas relações humanas. O reuso de \textit{software} surge como uma estratégia eficiente para acelerar o ciclo de vida de desenvolvimento de \textit{software}, esse reuso pode ser feito pelo aproveitamento de funcionalidade comuns disponibilizadas por \textit{frameworks} e bibliotecas. \textit{Frameworks} são estruturas de código referentes a todo um sistema ou a parte dele, que servem de base para a implementação de sistemas de \textit{software} \cite{johnson1997}, exemplos comuns incluem \textit{frameworks} para testes ou para desenvolvimento \textit{web}. Já as bibliotecas de \textit{software} contém funções de código voltadas a um domínio específico, prontas para serem reutilizadas em outros projetos, exemplos disso são bibliotecas para tratamento de dados ou identificar padrões em textos. Enquanto bibliotecas podem ser invocadas diretamente pelo código, \textit{frameworks} operam por meio da inversão de controle, gerenciando suas próprias sequências de atividades \cite{johnson1988}. Ao longo desta proposta, a união de \textit{frameworks} e bibliotecas pode ser representada pelos termos ferramentas ou pacotes.
 
-Contudo, a dependência de ferramentas de terceiros pode trazer algumas desvantagens para o projeto que as usa. Manter essas dependências atualizadas pode ser um desafio, algumas podem se tornar obsoletas por falta de manutenção, ou conter \textit{bugs} e vulnerabilidades que as tornam inadequadas para uso a longo prazo. Além disso, podem surgir novas ferramentas com melhor desempenho ou que contam com uma comunidade mais ativa.
+No entanto, a dependência de ferramentas de terceiros pode trazer algumas desvantagens para o projeto que as usa. Manter essas dependências atualizadas pode ser um desafio, algumas podem se tornar obsoletas por falta de manutenção, ou conter \textit{bugs} e vulnerabilidades que as tornam inadequadas para uso a longo prazo. Além disso, podem surgir novas ferramentas com melhor desempenho ou que contam com uma comunidade mais ativa.
 
 Ao projetar um sistema de \textit{software}, a fim de evitar retrabalho e alterações desnecessárias, é fundamental selecionar ferramentas que possam ser mantidas ao longo do tempo. Mesmo ferramentas bem estabelecidas podem se tornar obsoletas devido a problemas como falta de documentação \cite{robillard2011,zhong2013}, dificuldade de uso \cite{nadi2016} ou incompatibilidades causadas por mudanças na API \cite{mostafa2017,decan2019}.
 
-Assim como outros sistemas de \textit{software}, ferramentas passam por diferentes estágios de evolução: desenvolvimento inicial, manutenção, aprimoramento e, eventualmente, declínio. Portanto, é importante avaliar sua relevância e robustez ao longo do tempo. Ferramentas de \textit{software} bem estabelecidas geralmente possuem uma comunidade ativa de desenvolvedores, o que pode ser um indicativo de sua sustentabilidade a longo prazo. Da mesma forma, o suporte oferecido para o uso da ferramenta e a frequência de atualizações no código-fonte podem revelar em qual estágio do ciclo de vida ela se encontra atualmente.
+Assim como outros sistemas de \textit{software}, \textit{frameworks} e bibliotecas passam por diferentes estágios de evolução: desenvolvimento inicial, manutenção, aprimoramento e, eventualmente, declínio. Portanto, é importante avaliar sua relevância e robustez ao longo do tempo. Ferramentas de \textit{software} bem estabelecidas geralmente possuem uma comunidade ativa de desenvolvedores, o que pode ser um indicativo de sua sustentabilidade a longo prazo. Da mesma forma, o suporte oferecido para o uso da ferramenta e a frequência de atualizações no código-fonte podem revelar em qual estágio do ciclo de vida ela se encontra atualmente.
 
 A mineração de repositórios de \textit{software} (MSR) pode ser utilizada para analisar os padrões de evolução de projetos de \textit{software} de código aberto ao longo do tempo \cite{gold2022,hassan2008}. Portanto, a aplicação de MSR em \textit{frameworks} e bibliotecas pode ser útil para analisar como projetos de \textit{software} utilizam tais ferramentas e como as \textit{features} presentes em seus repositórios (por exemplo, \textit{issues}, \textit{commits}, \textit{stars}, etc.) evoluem.
 
@@ -57,32 +57,62 @@ Neste projeto de pesquisa, propomos o desenvolvendo uma metodologia para prever 
 \section{Trabalhos Relacionados}
 Estudos anteriores investigaram como as \textit{features} de um repositório podem auxiliar na compreensão da evolução de um \textit{software}. Esta seção apresenta o estado da arte e como essa pesquisa pode ampliá-lo.
 
-O algoritmo K-Spectral Centroid (KSC) utilizou \textit{features} como \textit{stars}, colaboradores, \textit{forks}, \textit{commits} e a idade do projeto \cite{borges2016}. Com base no modelo de agrupamento resultante, os autores propuseram os seguintes padrões de crescimento da popularidade de um repositório: lento, moderado, rápido e viral. Além disso, o estudo apontou uma forte correlação entre \textit{stars} e \textit{forks}.
+O uso do algoritmo \textit{K-Spectral Centroid} (KSC) proposto por \cite{borges2016} utilizou \textit{features} como colaboradores, idade do projeto, \textit{stars}, \textit{forks} e \textit{commits}. Com base no modelo de agrupamento resultante, os autores propuseram os seguintes padrões de crescimento da popularidade de um repositório: lento, moderado, rápido e viral. Além disso, o estudo apontou uma forte correlação entre \textit{stars} e \textit{forks}.
 
-% A correlação entre métricas de popularidade, como \textit{stars} e \textit{forks}, foi estudada em \cite{wang2023}; o mesmo estudo também discute a correlação entre atributos do arquivo README.md--número de linhas, número de imagens, intervalo de atualizações, etc.--e sua relação com a popularidade do repositório. Uma das conclusões do estudo é que a popularidade de um repositório está diretamente correlacionada à frequência e ao número de atualizações nos arquivos README.md.
+% A correlação entre métricas de popularidade, como \textit{stars} e \textit{forks}, foi estudada em \cite{wang2023}; o mesmo estudo também discute a correlação entre \textit{features} do arquivo README.md--número de linhas, número de imagens, intervalo de atualizações, etc.--e sua relação com a popularidade do repositório. Uma das conclusões do estudo é que a popularidade de um repositório está diretamente correlacionada à frequência e ao número de atualizações nos arquivos README.md.
 
 O estudo de \cite{coelho2020} desenvolveu um modelo de \textit{Random Forest} baseado em \textit{features} de repositórios--como \textit{commits}, desenvolvedores, \textit{issues}, \textit{pull requests}, entre outras. O modelo proposto foi capaz de prever se um repositório é mantido ou não. Ademais, os autores estabeleceram uma métrica para avaliar o risco de projetos deixarem de ser mantidos. Uma extensão para navegador--que não se encontra mais disponível--foi criada para extrair dados e calcular as métricas propostas para novos repositórios. Adicionalmente, a análise de correlação apresentada serve como um exemplo interessante de como a correlação auxilia a identificar quais dados devem ser descartados durante o treinamento de modelos preditivos.
 
-Centralidade de pacotes é o método proposto por \cite{mujahid2022} para identificar pacotes em declínio. Essa metodologia consiste na aplicação do algoritmo PageRank, do Google, às relações de dependência entre pacotes do *npm*. Ao realizar esse procedimento com base em registros históricos, os autores conseguiram prever se um projeto está ou não em declínio. Os autores desenvolveram uma extensão para o navegador Chrome que exibe essa centralidade, juntamente com outras métricas, no site do *npm*.
+A analise sobre a centralidade de pacotes foi proposta por \cite{mujahid2022} para identificar ferramentas em declínio. Essa metodologia consiste na aplicação do algoritmo PageRank, do Google, às relações de dependência entre pacotes do npm. Ao realizar esse procedimento com base em registros históricos, os autores conseguiram prever se um projeto está ou não em declínio. Os autores desenvolveram uma extensão para o navegador Chrome que exibe essa centralidade, juntamente com as outras métricas apresentadas no site do npm.
 
 % Juntamente com outros 92 fatores, \cite{zhang2023} estudou como desenvolvedores e integradores se relacionam entre si e como essas relações podem influenciar a taxa de aceitação de \textit{pull requests}.
 
-Embora com escopo limitado, a análise do ciclo de vida realizada por \cite{soupinski2022} identificou que, antes do "fim" oficial de um repositório, observa-se uma tendência a baixas taxas de resposta no Stack Overflow e de resolução de \textit{issues}. Após esse encerramento, não há mais evolução no número de \textit{commits} na base de código.
-
-Além de utilizar atributos apresentados em estudos anteriores, esta pesquisa analisa o interesse relativo no Google Trends, bem como os autores e revisores de \textit{issues} e \textit{pull requests}. Na próxima etapa, incluiremos outros atributos, tais como: observadores (*watchers*), *releases*, conteúdo de sites de perguntas e respostas (Q\&A), informações sobre o uso de gerenciadores de dependências (por exemplo, npm, Maven), métricas de qualidade de código-fonte e relatórios de \textit{bugs}. Pretendemos aplicar diversos modelos preditivos aos dados coletados, incluindo modelos de aprendizado de máquina (como *Random Forest* e SVM) e modelos estatísticos de previsão de séries temporais (como ARIMA e SARIMAX). Contudo, para isso, um passo fundamental é examinar a correlação entre os atributos--visando à sua seleção--e realizar uma análise inicial de tendências, o que constitui o foco deste artigo.
+Embora com escopo limitado, a análise do ciclo de vida realizada por \cite{soupinski2022} identificou que, antes da morte oficial de um repositório, observa-se uma tendência a baixas taxas de resposta no Stack Overflow e de resolução de \textit{issues}. O estudo também apontou que após a morte dos repositórios observados não foram observados avanços no número de \textit{commits} que modificam arquivos de código fonte.
 
 \section{Objetivos e Questões de Pesquisa}
+O objetivo geral desse trabalho é desenvolver um método para auxiliar desenvolvedores de \textit{software} na tomada de decisão sobre qual \textit{framework} ou biblioteca adotar dentro de seus projetos.
+
+Além de utilizar \textit{features} apresentados em estudos anteriores, vamos basear a nossa pesquisa em dados coletados a partir de vários pontos do ecossistema dessas ferramentas. Pretendemos observar \textit{features} relacionadas ao repositório de código (GitHub), conteúdo de sites de pergunta e resposta (StackOverflow), popularidade medida por motores de busca (Google Trends), uso dentro de gerenciadores de dependências (por exemplo, npm, Maven, PyPi).
+
+Além disso, para prever o estado do ciclo de vida dessas ferramentas, pretendemos aplicar diversos modelos preditivos aos dados coletados, incluindo modelos de aprendizado de máquina, como \textit{Random Forest} e \textit{Support Vector Machine} (SVM), e modelos estatísticos de previsão de séries temporais, como \textit{AutoRegressive Integrated Moving Average} (ARIMA) e suas variantes (por exemplo, SARIMA, SARIMAX).
+
+Com base nos objetivos apresentados, o projeto de mestrado será desenvolvido buscando responder as seguintes questões de pesquisa:
+
 \begin{itemize}
-    \item \textbf{QP1} Qual é a precisão do método proposto na previsão da etapa do ciclo de vida de bibliotecas e frameworks?
-    \item \textbf{QP2} Quais são as \textit{features} de repositórios de código mais relevantes para prever a etapa do ciclo de vida?
+    \item \textbf{QP1} Qual é a precisão do método proposto na previsão do estágio do ciclo de vida de bibliotecas e frameworks?
+    \item \textbf{QP2} Quais são as \textit{features} de repositórios de código mais relevantes para prever o estágio do ciclo de vida?
     \item \textbf{QP3} Com que antecedência nosso método consegue determinar se um projeto está em uma tendência de baixa ou de alta?
 \end{itemize}
 
 \section{Metodologia}
-TODO...
+A metodologia adotada nesse projeto segue as melhoras práticas para mineração de repositórios apresentas por \cite{cookbook}, incluindo as etapas de aquisição, preparação e análise de dados.
+
+\subsection{Aquisição de Dados}
+Faremos uma coleta sistemática de quais repositórios analisar utilizando a ferramenta SEART \cite{seart}, que consiste em um \textit{dataset} de repositórios hospedados no GitHub. A ferramenta permite que a listagem de repositórios seja feita a partir de filtros como número de \textit{commits}, \textit{issues}, \textit{pull requests}, \textit{stars}, \textit{forks}, entre outros. Provendo assim uma fonte consistente para o propósito da nossa pesquisa. A partir dessa listagem, pretendemos coletar as seguintes \textit{features} dos repositórios selecionados: \textit{commits}, \textit{issues}, autores e revisores de \textit{issues}, \textit{pull requests}, autores e revisores de \textit{pull requests}, \textit{stars}, \textit{forks}, \textit{watchers} e \textit{releases}.
+
+Para os dados de \textit{commits} e autores de \textit{commits}, iremos utilizar a biblioteca PyDriller \cite{pydriller}, esta biblioteca realiza \textit{clone} de repositórios GIT e fornece uma interface para operar sobre o repositório utilizando a linguagem Python.
+
+Para os demais dados que pretendemos coletar do GitHub, iremos utilizar a ferramenta PoolinGH \cite{poolingh}. Esta é uma biblioteca JavaScript utilizada para gerenciar filas de requisições para o GitHub com base em um \textit{pool} de \textit{tokens} de autenticação com o repositório remoto. Para os propósitos desse trabalho utilizaremos as APIs REST e GraphQL disponibilizadas pelo GitHub.
+
+Também coletaremos dados referentes a popularidade relativa dos repositórios, dados estes que são fornecidos pelo Google através da ferramenta Google Trends. Para isso, contaremos com a biblioteca pytrends-modern\footnote{https://github.com/yiromo/pytrends-modern}. Esta biblioteca fornece uma interface em Python com abstrações das APIs do Google Trends, simulando seções de usuário e realizando \textit{web scrapping}.
+
+Além disso, a coleta de dados será complementada com informações de pesquisas feitas no \textit{StackOverflow} ao longo do tempo, informações estas que podem ser coletadas a partir de APIs disponibilizadas pela própria ferramenta.
+
+Por fim, pretendemos coletar dados do relacionamento entre bibliotecas dentro de gerenciadores de dependências como npm, Maven, PyPi, entre outros.
+
+\subsection{Preparação e Analise dos Dados}
+Para a etapa de preparação iremos sumarizar os dados em visões diárias e mensais, completando os períodos sem dados para que nenhuma análise seja prejudicada. Após isso pretendemos realizar análises de correlação entre as features, utilizando os testes de Pearson e Spearman juntamente com o algoritmo Anderson-Darling para identificar padrões de comportamento entre as diversas features coletadas. Além disto, pretendemos realizar outros tipos de análise de seleção de features, como por exemplo a análise de limiar de variância. Com essas análises pretendemos responder majoritariamente a \textbf{QP2}.
+
+Após isso, pretendemos aplicar modelos de aprendizado de máquina, como \textit{Random Forest} e SVM, além de realizar análises com modelos de série temporal como o ARIMA e seus variantes. Com essas análises pretendemos responder a \textbf{QP1} e \textbf{QP3}.
 
 \section{Plano de Trabalho e Cronograma}
-TODO...
+Nesta sessão será apresentado o trabalho que já foi feito e os próximos passos para o programa de mestrado.
+
+Ao decorrer do ano de 2026, afim de cumprir com as exigências do programa de mestrado, foram realizadas 4 disciplinas e o exame de proficiência em lingua inglesa. Também foi conduzida uma revisão preliminar da literatura, a fim de realizar um levantamento inicial do estado da arte da área, com isso, iniciamos alguns experimentos. Já no último trimestre deste ano, será submetido um \textit{short paper} contendo os resultados preliminares da nossa pesquisa.
+
+Para o ano de 2027, será finalizada a quantidade de créditos necessários para o cumprimento das regras do programa. Bem como uma revisão complementar da literatura e submissão de \textit{survey} contendo os detalhes e descobertas da nossa revisão. Os nossos experimentos continuarão sendo realizados ao longo deste ano. Já nos últimos dois trimestres de 2027, juntamente com o primeiro trimestre de 2028, será escrita a dissertação do mestrado. Por fim, a defesa da dissertação será feita no primeiro trimestre do ano de 2028.
+
+A tabela abaixo detalha em trimestres (Tn) o cronograma do que já foi feito até aqui e dos próximos passos da nossa pesquisa:
 
 \begin{table}[H]
     \centering
@@ -96,12 +126,13 @@ TODO...
             \hline
             Obtenção de créditos em disciplinas               & $\bm{\ast}$               & $\bm{\ast}$               & $\bm{\ast}$ & $\bm{\ast}$             & $\bm{\ast}$ & $\bm{\ast}$ &             &                         &             \\
             Proficiência em língua inglesa                    &                           & $\bm{\ast}$               &             &                         &             &             &             &                         &             \\
+            Revisão Preliminar da Literatura                  &                           &                           & $\bm{\ast}$ & $\bm{\ast}$             &             &             &             &                         &             \\
             Experimentos                                      &                           &                           & $\bm{\ast}$ & $\bm{\ast}$             & $\bm{\ast}$ & $\bm{\ast}$ & $\bm{\ast}$ &                         &             \\
-            Submissão short paper MSR2027                     &                           &                           &             & $\bm{\ast}$             &             &             &             &                         &             \\
+            Submissão de resultados preliminares              &                           &                           &             & $\bm{\ast}$             &             &             &             &                         &             \\
             Revisão Complementar da Literatura                &                           &                           &             &                         & $\bm{\ast}$ & $\bm{\ast}$ &             &                         &             \\
-            Submissão Survey SBES                             &                           &                           &             &                         &             & $\bm{\ast}$ &             &                         &             \\
+            Submissão de \textit{Survey}                      &                           &                           &             &                         &             & $\bm{\ast}$ &             &                         &             \\
             Redação da Dissertação do Mestrado                &                           &                           &             &                         &             &             & $\bm{\ast}$ & $\bm{\ast}$             & $\bm{\ast}$ \\
-            Apresentação da Dissertação do Mestrado           &                           &                           &             &                         &             &             &             &                         & $\bm{\ast}$ \\
+            Defesa da Dissertação do Mestrado                 &                           &                           &             &                         &             &             &             &                         & $\bm{\ast}$ \\
             \hline
         \end{tabular}%
     }
