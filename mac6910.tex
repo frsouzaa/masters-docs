@@ -1,5 +1,6 @@
 \documentclass[11pt,a4paper]{article}
 
+\usepackage{svg}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{helvet}
@@ -16,6 +17,7 @@
 \usepackage{breakcites}
 
 \renewcommand{\familydefault}{\sfdefault}
+\renewcommand{\figurename}{Figura}
 \doublespacing
 % \onehalfspacing
 
@@ -74,7 +76,7 @@ O objetivo geral desse trabalho é desenvolver um método para auxiliar desenvol
 
 Além de utilizar \textit{features} apresentados em estudos anteriores, vamos basear a nossa pesquisa em dados coletados a partir de vários pontos do ecossistema dessas ferramentas. Pretendemos observar \textit{features} relacionadas ao repositório de código (GitHub), conteúdo de sites de pergunta e resposta (StackOverflow), popularidade medida por motores de busca (Google Trends), uso dentro de gerenciadores de dependências (por exemplo, npm, Maven, PyPi).
 
-Além disso, para prever o estado do ciclo de vida dessas ferramentas, pretendemos aplicar diversos modelos preditivos aos dados coletados, incluindo modelos de aprendizado de máquina, como \textit{Random Forest} e \textit{Support Vector Machine} (SVM), e modelos estatísticos de previsão de séries temporais, como \textit{AutoRegressive Integrated Moving Average} (ARIMA) e suas variantes (por exemplo, SARIMA, SARIMAX).
+Além disso, para prever o estado do ciclo de vida dessas ferramentas, pretendemos aplicar diversos modelos preditivos aos dados coletados, incluindo modelos de aprendizado de máquina, como \textit{Random Forest} e \textit{Support Vector Machine} (SVM), e modelos estatísticos para análise ou previsão de séries temporais, como \textit{Exponential Moving Average} (EMA), \textit{AutoRegressive Integrated Moving Average} (ARIMA) e suas variantes (por exemplo, SARIMA, SARIMAX).
 
 Com base nos objetivos apresentados, o projeto de mestrado será desenvolvido buscando responder as seguintes questões de pesquisa:
 
@@ -103,7 +105,7 @@ Por fim, pretendemos coletar dados do relacionamento entre bibliotecas dentro de
 \subsection{Preparação e Analise dos Dados}
 Para a etapa de preparação iremos sumarizar os dados em visões diárias e mensais, completando os períodos sem dados para que nenhuma análise seja prejudicada. Após isso pretendemos realizar análises de correlação entre as features, utilizando os testes de Pearson e Spearman juntamente com o algoritmo Anderson-Darling para identificar padrões de comportamento entre as diversas features coletadas. Além disto, pretendemos realizar outros tipos de análise de seleção de features, como por exemplo a análise de limiar de variância. Com essas análises pretendemos responder majoritariamente a \textbf{QP2}.
 
-Após isso, pretendemos aplicar modelos de aprendizado de máquina, como \textit{Random Forest} e SVM, além de realizar análises com modelos de série temporal como o ARIMA e seus variantes. Com essas análises pretendemos responder a \textbf{QP1} e \textbf{QP3}.
+Após isso, pretendemos aplicar modelos de aprendizado de máquina, como \textit{Random Forest}, além de realizar análises com modelos de série temporal como o ARIMA e seus variantes. Com essas análises pretendemos responder a \textbf{QP1} e \textbf{QP3}.
 
 \section{Plano de Trabalho e Cronograma}
 Nesta sessão será apresentado o trabalho que já foi feito e os próximos passos para o programa de mestrado.
@@ -139,7 +141,38 @@ A tabela abaixo detalha em trimestres (Tn) o cronograma do que já foi feito at�
 \end{table}
 
 \section{Resultados Preliminares}
-TODO...
+Nessa sessão apresentaremos os detalhes preliminares no nosso estudo, com base na revisão da literatura e experimentos conduzidos até então.
+
+Iniciamos nosso experimento principal coletando repositórios pela ferramenta SEART a partir dos seguintes filtros: Repositórios que não são \textit{forks}, criados antes de 1º de janeiro de 2021, com funcionalidades de \textit{issues} e \textit{pull requests} ativas, pelo menos 1000 commits, 500 \textit{issues}, 500 \textit{pull requests}, 500 \textit{stars}, 100 \textit{forks} e uma release. Depois foram ranqueadas as 10 linguagens com mais aparições na métrica de principal linguagem de um repositório, que foram: Python (16.10\% dos repositórios), TypeScript (13.62\%), Go (10.72\%), C++ (10.02\%), JavaScript (9.65\%), Java (8.82\%), C\# (5.20\%), C (4.93\%), PHP (4.39\%), e Rust (4.03\%). Como a nossa prioridade com esse estudo era analisar projetos populares e bem estabelecidos, os repositórios foram ordenados pelo número de \textit{stars}, e os primeiros 15 repositórios de cada linguagem foram selecionados. Com isso, selecionamos 3 repositórios de \textit{frameworks} e bibliotecas de cada linguagem, conforme tabela abaixo:
+
+\begin{table}[H]
+    \centering
+    \resizebox{\textwidth}{!}{%
+        \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+            \hline
+            \textit{\textbf{Python}} & \textit{\textbf{TypeScript}} & \textit{\textbf{Go}} & \textit{\textbf{C++}} & \textit{\textbf{JavaScript}} & \textit{\textbf{Java}} & \textit{\textbf{C\#}} & \textit{\textbf{C}} & \textit{\textbf{PHP}} & \textit{\textbf{Rust}} \\ \hline
+            fastapi                  & vue                      & hugo                 & electron              & react                        & spring-boot            & aspnetcore            & curl               & framework             & ripgrep                     \\ \hline
+            pytorch                  & angular                          & gin              & opencv                & bootstrap                    & guava                  & avalonia                  & nginx                & phpmailer             & bevy                \\ \hline
+            flask                    & puppeteer                    & traefik              & json                  & axios                        & dubbo                  & maui              & openssl             & phpunit               & fd                   \\ \hline
+        \end{tabular}%
+    }
+\end{table}
+
+Então coletamos as seguintes \textit{features} de cada repositório: \textit{commits}, \textit{issues}, autores e revisores de \textit{issues}, \textit{pull requests}, autores e revisores de \textit{pull requests}, \textit{stars}, \textit{forks} e o interesse relativo do Google. Foram coletados dados desde a data de criação de cada repositório até o fim de setembro de 2026.
+
+Após a coleta dos dados, executamos o teste de Anderson-Darling sobre as \textit{features} de cada repositório para determinar quais dados seguem uma distribuição normal ou não. Essa informação é determinante para a escolha de qual teste de correlação utilizar: Pearson, indicado para distribuições normais, ou Spearman, indicado para distribuições não normais.
+
+Também aplicamos o EMA sobre os dados coletados, essa técnica é utilizada para criar médias móveis mais sensíveis a novos dados, o que é ideal para o nosso caso, onde \textit{commits} atuais são mais importes para apontar o ciclo de vida do que \textit{commits} antigos, por exemplo. Para essa análise consideramos dois cenários de EMA, um com fator de peso igual a 0.16, que reage mais rápido a mudanças (\textit{short-term} EMA), e outro com fator de peso igual a 0.08 (\textit{long-term} EMA). Comparando os dois podemos dizer se a \textit{feature} de um projeto apresenta uma tendência de alta ou de baixa. Se o valor do \textit{short-term} EMA for maior que o \textit{long-term} EMA consideramos que a \textit{feature} está em alta, caso contrário, consideramos tendência de baixa.
+
+Como resultado desse estudo preliminar descobrimos que \textit{commits}, \textit{issues} e \textit{pull requests} possuem grande correlação com seus respectivos autores. Do mesmo modo, \textit{stars} e \textit{forks} também apresentam uma alta correlação entre a maioria dos projetos, a Figura \ref{react} mostra análise de correlação para a biblioteca React, que é um caso que bem representa os resultados gerais. Essas descobertas abrem o caminho para uma resposta a \textbf{QP2}, mas estudos mais aprofundados ainda precisam ser conduzidos para que possamos ter uma resposta mais precisa.
+
+\begin{figure}[htbp]
+    \centering
+    \includesvg[width=\columnwidth]{react.svg}
+    \caption{Análise de correlação das \textit{features} da biblioteca React}
+    \label{react}
+\end{figure}
+
 
 \bibliographystyle{apalike}
 \bibliography{references}
